@@ -6,21 +6,9 @@
 require_once('includes/db.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
     if (!empty($_POST['characters'])) {
-
-        $characters = json_decode($_POST['characters']);
-
-        // clean data and make sure it is in expected format
-        $characters = array_map(function($character) {
-            return [
-                'name' => htmlspecialchars(trim($character->name)),
-                'image' => htmlspecialchars(trim($character->image))
-            ];
-        }, $characters);
-
         // save new game to database
-        $game_data = new_game($characters);
+        $game_data = new_game($_POST['characters']);
     }
 } // if POST
 

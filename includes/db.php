@@ -62,14 +62,28 @@ function load_game($code) {
 
 /**
  * Give a list of characters, generate a random game code and save the game data to the database
- * @param  [Array] $characters : Array of characters (names and images) to use for the new game
+ * @param  [Array|String] $characters : Array of characters (names and images) to use for the new game, or JSON encoded string
  * @return [Array] $data : Associative array of the new game's code and characters, or false if there was an error
  */
 function new_game($characters) {
 
+    // if json was passed, decode it
+    if (is_string($characters)) {
+        $characters = json_decode($characters);
+    }
+
+    // clean character data and make sure it is in expected format
+    $characters = array_map(function($character) {
+        return [
+            'name' => htmlspecialchars(trim($character->name)),
+            'image' => trim($character->image)
+        ];
+    }, $characters);
+
+    $characters_json = json_encode($characters);
+
     // todo: check if code already exists in db
     $code = generate_random_string();
-    $characters_json = json_encode($characters);
 
     // connect to db
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
