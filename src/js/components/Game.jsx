@@ -1,5 +1,8 @@
 'use strict';
 
+// components
+import Tile from './Tile.jsx';
+
 /**
  * Component: Game
  * The main game board - displays a grid of characters
@@ -22,3 +25,5 @@ class Game extends React.Component {
     );
   }
 }
+
+export default Game;

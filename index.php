@@ -83,15 +83,11 @@ if (!empty($_GET['code'])) {
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
-<!-- todo: remove this and compile jsx -->
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-    <!-- todo: compile jsx components -->
-    <script type="text/babel" src="assets/js/components/Tile.js"></script>
-    <script type="text/babel" src="assets/js/components/Game.js"></script>
-
+    <!-- game data -->
     <script id="game-data" type="application/json"><?php echo json_encode($game_data); ?></script>
-    <script type="text/babel" src="./assets/js/whodis.js"></script>
+
+    <!-- main js -->
+    <script type="text/javascript" src="./dist/main.js"></script>
 
 </body>
 

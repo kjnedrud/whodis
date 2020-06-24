@@ -3,6 +3,11 @@
  * Main JS for the game
  */
 
+import libmoji from 'libmoji';
+
+// components
+import Game from './js/components/Game.jsx';
+
 // add event listener for New Game button
 document.querySelector('#new-game').addEventListener('click', newGame);
 
@@ -50,8 +55,18 @@ function newGame(e) {
  * @return {String} Character image URL
  */
 function getRandomImage() {
-    // todo: generate random image
-    return 'http://placehold.it/100x100';
+
+    // generate random image options
+    let gender = libmoji.genders[libmoji.randInt(2)];
+    // let style = libmoji.styles[libmoji.randInt(3)];
+    let style = libmoji.styles[2];
+    let traits = libmoji.randTraits(libmoji.getTraits(gender[0],style[0]));
+    let outfit = libmoji.randOutfit(libmoji.getOutfits(libmoji.randBrand(libmoji.getBrands(gender[0]))));
+
+    // build image url
+    let image = libmoji.buildPreviewUrl('head', 2, gender[1], style[1], 0, traits, outfit);
+
+    return image;
 }
 
 /**
