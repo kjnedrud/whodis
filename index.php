@@ -25,37 +25,8 @@ if (!empty($_GET['code'])) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
     <title>Who Dis?</title>
-
-    <!-- todo: move styles to external sass file and compile -->
-    <style type="text/css">
-        .board {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            grid-gap: 1em;
-        }
-        .tile {
-            background: #ffe200;
-            display: block;
-            padding: 1em;
-            text-align: center;
-            transform-style: preserve-3d;
-            transition: all 800ms;
-        }
-        .tile.hidden {
-            background: #f1b200;
-            transform: rotateX(180deg);
-        }
-        .tile img {
-            height: auto;
-            max-width: 100%;
-        }
-        .tile .name {
-            display:  block;
-        }
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="./assets/css/whodis.css">
     <script>const baseURL = '<?php echo BASE_URL; ?>';</script>
-
 </head>
 
 <body>
@@ -87,7 +58,7 @@ if (!empty($_GET['code'])) {
     <script id="game-data" type="application/json"><?php echo json_encode($game_data); ?></script>
 
     <!-- main js -->
-    <script type="text/javascript" src="./dist/main.js"></script>
+    <script type="text/javascript" src="./assets/js/whodis.js"></script>
 
 </body>
 

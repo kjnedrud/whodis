@@ -6,7 +6,7 @@
 import libmoji from 'libmoji';
 
 // components
-import Game from './js/components/Game.jsx';
+import Game from './components/Game.jsx';
 
 // add event listener for New Game button
 document.querySelector('#new-game').addEventListener('click', newGame);
