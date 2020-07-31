@@ -121,28 +121,26 @@ class Game extends React.Component {
             });
 
             gameContent = (
-                <>
-                    <Header code={this.props.code} identity={this.state.identity} />
+                <div class="board">
+                    {tiles}
+                </div>
+            );
 
-                    <div class="board">
-                        {tiles}
-                    </div>
-
-                    <Footer code={this.props.code} />
-                </>
+        } else if (this.props.code) {
+            gameContent = (
+                <p class="error">Sorry, <b>{this.props.code}</b> is not a valid game code.</p>
             );
         } else {
-            gameContent = (
-                <>
-                    <Header code={this.props.code} identity={false} />
-
-                    <p class="error">Sorry, <b>{this.props.code}</b> is not a valid game code.</p>
-                    <Footer code={this.props.code} />
-                </>
-            );
+            gameContent = (<p>Enter your game code below or start a new game!</p>);
         }
 
-        return gameContent;
+        return (
+            <>
+                <Header code={this.props.code} identity={this.state.identity} />
+                {gameContent}
+                <Footer code={this.props.code} />
+            </>
+        );
     }
 }
 

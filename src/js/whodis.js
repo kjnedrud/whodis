@@ -23,5 +23,9 @@ function initGame(gameData) {
 
     const gameContainer = document.querySelector('#game');
 
-    ReactDOM.render(<Game code={gameData.code} characters={gameData.characters ? gameData.characters : null} />, gameContainer);
+    if (gameData) {
+        ReactDOM.render(<Game code={gameData.code} characters={gameData.characters} />, gameContainer);
+    } else {
+        ReactDOM.render(<Game/>, gameContainer);
+    }
 }

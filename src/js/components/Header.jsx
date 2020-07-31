@@ -11,11 +11,17 @@ class Header extends React.Component {
 
   render() {
     let headerContent = (
-      <>
-        <h1>Who Dis?</h1>
-        <h2>Game Code: {this.props.code}</h2>
-      </>
+      <h1>Who Dis?</h1>
     );
+
+    if (this.props.code) {
+      headerContent = (
+        <>
+          {headerContent}
+          <h2>Game Code: {this.props.code}</h2>
+        </>
+      );
+    }
 
     if (this.props.identity) {
       headerContent = (
