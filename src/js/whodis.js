@@ -3,6 +3,7 @@
  * Main JS for the game
  */
 
+// library for generating bitmoji faces
 import libmoji from 'libmoji';
 
 // components
@@ -14,9 +15,7 @@ document.querySelector('#new-game').addEventListener('click', newGame);
 // parse game data and initialize the game
 if (document.querySelector('#game-data')) {
     let gameData = JSON.parse(document.querySelector('#game-data').innerHTML);
-    if (gameData) {
-        initGame(gameData);
-    }
+    initGame(gameData);
 }
 
 /**
@@ -100,15 +99,11 @@ function generateCharacters(count = 24) {
  * @return {void}
  */
 function initGame(gameData) {
-    const gameContainer = document.querySelector('#game');
-    let gameTitle = <h2>Game Code: {gameData.code}</h2>;
-    let gameContent;
 
     if (gameData.characters) {
-        gameContent = <Game characters={gameData.characters} />;
-    } else {
-        gameContent = <p class="error">Sorry, <b>{gameData.code}</b> is not a valid game code.</p>;
-    }
+console.log(gameData.characters);
+        const gameContainer = document.querySelector('#game');
 
-    ReactDOM.render((<div>{gameTitle}{gameContent}</div>), gameContainer);
+        ReactDOM.render(<Game code={gameData.code} characters={gameData.characters} />, gameContainer);
+    }
 }

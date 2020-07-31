@@ -7,26 +7,23 @@
 class Tile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { visible: true };
     this.flipTile = this.flipTile.bind(this);
   }
 
   flipTile(e) {
-    this.setState(state => ({
-      visible: !state.visible
-    }));
+    this.props.onFlip(this.props.index, !this.props.character.visible);
   }
 
   render() {
     let tileClass = 'tile';
     let tileContent = '';
 
-    if (this.state.visible) {
+    if (this.props.character.visible) {
       tileContent = (
-        <div>
+        <>
           <img src={this.props.character.image} width="100" height="100" />
           <b class="name">{this.props.character.name}</b>
-        </div>
+        </>
       );
     } else {
       tileClass += ' hidden';
