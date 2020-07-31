@@ -31,23 +31,7 @@ if (!empty($_GET['code'])) {
 
 <body>
 
-    <h1>Who Dis?</h1>
-
     <div id="game"></div>
-
-    <hr>
-
-    <h2>Join or Continue</h2>
-    <form action="<?php echo BASE_URL; ?>/" method="get">
-        <p>
-            <label for="input-code">Game Code</label>
-            <input id="input-code" name="code" value="<?php echo $code; ?>" type="text">
-        </p>
-        <button type="submit">Join Game</button>
-    </form>
-
-    <h2>New Game</h2>
-    <button id="new-game">Start New Game</button>
 
     <!-- Load React. -->
     <!-- Note: when deploying, replace "development.js" with "production.min.js". -->

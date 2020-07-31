@@ -1,6 +1,8 @@
 'use strict';
 
 // components
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 import Tile from './Tile.jsx';
 
 /**
@@ -12,11 +14,13 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
 
+        let state = {};
+
         if (props.code && props.characters) {
             // load the current game state
             let gameState = this.loadGameState();
 
-            this.state = {
+            state = {
                 tiles: props.characters.map((character, index) => {
                     return {
                         character: character,
@@ -28,6 +32,7 @@ class Game extends React.Component {
             };
         }
 
+        this.state = state;
         this.updateTileState = this.updateTileState.bind(this);
     }
 
@@ -117,17 +122,22 @@ class Game extends React.Component {
 
             gameContent = (
                 <>
-                    {gameTitle}
+                    <Header code={this.props.code} identity={this.state.identity} />
+
                     <div class="board">
                         {tiles}
                     </div>
+
+                    <Footer code={this.props.code} />
                 </>
             );
         } else {
             gameContent = (
                 <>
-                    {gameTitle}
+                    <Header code={this.props.code} identity={false} />
+
                     <p class="error">Sorry, <b>{this.props.code}</b> is not a valid game code.</p>
+                    <Footer code={this.props.code} />
                 </>
             );
         }
