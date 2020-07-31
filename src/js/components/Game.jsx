@@ -12,21 +12,20 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-        };
+        if (props.code && props.characters) {
+            // load the current game state
+            let gameState = this.loadGameState();
 
-        if (props.characters) {
-
-            // get the current game state
-            let gameState = this.getGameState();
-
-            // map visibility state to character tiles
-            this.state.characters = props.characters.map((character, index) => {
-                character.visible = gameState.tileVisibility[index];
-                return character;
-            });
-
-            this.state.identity = props.characters[gameState.characterIndex];
+            this.state = {
+                tiles: props.characters.map((character, index) => {
+                    return {
+                        character: character,
+                        visible: gameState.tileVisibility[index],
+                    };
+                }),
+                identity: props.characters[gameState.characterIndex],
+                saved: gameState,
+            };
         }
 
         this.updateTileState = this.updateTileState.bind(this);
@@ -53,10 +52,10 @@ class Game extends React.Component {
     }
 
     /**
-     * Get the saved game state from local storage, or create a new game state
+     * Load the saved game state from local storage, or create a new game state
      * @return {Object}
      */
-    getGameState() {
+    loadGameState() {
         // check local storage for a saved game state
         let gameState = window.localStorage.getItem(this.props.code);
 
@@ -80,34 +79,26 @@ class Game extends React.Component {
         window.localStorage.setItem(this.props.code, JSON.stringify(gameState));
     }
 
-
     /**
      * Update the state of a specific tile
-     * @param  {Integer} indexToUpdate : the index of the tile to update
+     * @param  {Integer} index : the index of the tile to update
      * @param  {Boolean} visible : whether the tile is visible or not
      * @return {void}
      */
-    updateTileState(indexToUpdate, visible) {
+    updateTileState(index, visible) {
 
-        // make a copy of characters to update and set the visibility of the character tile to update
-        let newCharacters = this.state.characters.map((character, index) => {
-            if (index == indexToUpdate) {
-                character.visible = visible;
-            }
-            return character;
-        });
-
-        // set the state to the updated characters
-        this.setState({
-            characters: newCharacters
+        // update react state
+        this.setState(prevState => {
+            let newTiles = [...prevState.tiles];
+            newTiles[index].visible = visible;
+            return {tiles: newTiles};
         });
 
         // update the game state and save to local storage
-        let newGameState = this.getGameState();
-        newGameState.tileVisibility[indexToUpdate] = visible;
+        let newGameState = {...this.state.saved};
+        newGameState.tileVisibility[index] = visible;
         this.saveGameState(newGameState);
     }
-
 
     /**
      * Render function for the Game component
@@ -118,10 +109,10 @@ class Game extends React.Component {
         let gameTitle = <h2>Game Code: {this.props.code}</h2>;
         let gameContent;
 
-        if (this.state.characters) {
+        if (this.state.tiles) {
 
-            let tiles = this.state.characters.map((character, index) => {
-              return (<Tile key={index} index={index} character={character} onFlip={this.updateTileState} />);
+            let tiles = this.state.tiles.map((tile, index) => {
+              return (<Tile key={index} index={index} character={tile.character} visible={tile.visible} onFlip={this.updateTileState} />);
             });
 
             gameContent = (

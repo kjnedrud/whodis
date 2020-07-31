@@ -84,7 +84,7 @@ function getRandomName() {
  */
 function generateCharacters(count = 24) {
     let characters = [];
-    for (let i=0; i<24; i++) {
+    for (let i=0; i<count; i++) {
         characters.push({
             name: getRandomName(),
             image: getRandomImage(),
@@ -101,7 +101,6 @@ function generateCharacters(count = 24) {
 function initGame(gameData) {
 
     if (gameData.characters) {
-console.log(gameData.characters);
         const gameContainer = document.querySelector('#game');
 
         ReactDOM.render(<Game code={gameData.code} characters={gameData.characters} />, gameContainer);
