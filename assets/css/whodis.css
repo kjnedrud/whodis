@@ -1,27 +1,75 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  color: #333;
+  font-family: sans-serif;
+}
+
 .board {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(8, minmax(80px, 1fr));
   grid-gap: 1em;
 }
 
 .tile {
-  background: #ffe200;
-  display: block;
-  padding: 1em;
-  text-align: center;
+  position: relative;
+}
+.tile .front, .tile .back {
+  backface-visibility: hidden;
+  box-sizing: border-box;
+  height: 100%;
   transform-style: preserve-3d;
   transition: all 800ms;
 }
-.tile.hidden {
-  background: #f1b200;
-  transform: rotateX(180deg);
+.tile .front {
+  background: #ffe200;
+  border: 2px outset #ffe200;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 0.5em;
+  text-align: center;
 }
-.tile img {
+.tile .front img {
   background: #fff;
   border: 2px solid #000;
+  box-sizing: border-box;
   height: auto;
-  max-width: 100%;
+  width: 100%;
 }
-.tile .name {
+.tile .front .name {
   display: block;
+  font-size: 0.75em;
+  margin-top: 0.5em;
+}
+.tile .back {
+  background: #f1b200;
+  border: 2px outset #ffe200;
+  bottom: 0;
+  content: "";
+  display: block;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: rotateX(180deg);
+}
+.tile.hidden .front {
+  transform: rotateX(180deg);
+}
+.tile.hidden .back {
+  transform: rotateX(360deg);
+}
+
+@media screen and (max-width: 767px) {
+  .board {
+    grid-template-columns: repeat(6, minmax(80px, 1fr));
+  }
+}
+@media screen and (max-width: 599px) {
+  .board {
+    grid-template-columns: repeat(4, minmax(80px, 1fr));
+  }
 }
