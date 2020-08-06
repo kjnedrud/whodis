@@ -79,14 +79,32 @@ class Footer extends React.Component {
    * @return {Array} characters : Array of character objects
    */
   generateCharacters(count = 24) {
-      let characters = [];
+    let characters = [];
+    let urlParams = new URLSearchParams(window.location.search);
+    let customGame = urlParams.get('game');
+
+    // check for custom game
+    if (customGame && document.querySelector('#custom-game-characters')) {
+      // parse custom game characters and map image urls
+      let customCharacters = JSON.parse(document.querySelector('#custom-game-characters').innerHTML).map(character => {
+        character.image = `${baseURL}/assets/img/${customGame}/${character.image}`;
+        return character;
+      });
+      // randomize characters
+      characters = customCharacters.sort(function(){
+          return .5 - Math.random();
+      }).slice(0, count);
+
+    } else {
+      // generate random characters for default game
       for (let i=0; i<count; i++) {
-          characters.push({
-              name: this.getRandomName(),
-              image: this.getRandomImage(),
-          });
+        characters.push({
+            name: this.getRandomName(),
+            image: this.getRandomImage(),
+        });
       }
-      return characters;
+    }
+    return characters;
   }
 
   render() {

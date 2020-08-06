@@ -4,8 +4,8 @@
  * Main page for the game
  */
 
-require_once('includes/config.php');
-require_once('includes/db.php');
+require_once(__DIR__ . '/includes/config.php');
+require_once(__DIR__ . '/includes/db.php');
 
 $code = null;
 $game_data = null;
@@ -37,6 +37,10 @@ if (!empty($_GET['code'])) {
     <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <?php if (!empty($_GET['game'])) : ?>
+        <script id="custom-game-characters" type="application/json"><?php echo file_get_contents(__DIR__ . '/includes/json/' . htmlspecialchars(trim($_GET['game'])) . '.json'); ?></script>
+    <?php endif; ?>
 
     <!-- game data -->
     <script id="game-data" type="application/json"><?php echo json_encode($game_data); ?></script>

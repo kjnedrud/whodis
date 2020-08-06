@@ -6,8 +6,6 @@
 // components
 import Game from './components/Game.jsx';
 
-const urlParams = new URLSearchParams(window.location.search);
-
 // parse game data and initialize the game
 if (document.querySelector('#game-data')) {
     let gameData = JSON.parse(document.querySelector('#game-data').innerHTML);
