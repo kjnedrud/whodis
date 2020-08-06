@@ -11,7 +11,7 @@ class Header extends React.Component {
 
   render() {
     let headerContent = (
-      <h1>Who Dis?</h1>
+      <h1>{this.props.title}</h1>
     );
 
     if (this.props.code) {

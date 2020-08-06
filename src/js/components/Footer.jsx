@@ -23,6 +23,9 @@ class Footer extends React.Component {
 
       let characters = this.generateCharacters();
       let data = 'characters=' + encodeURIComponent(JSON.stringify(characters));
+      if (this.props.customGameSettings) {
+        data += '&game=' + this.props.customGameSettings.game;
+      }
       let request = new XMLHttpRequest();
       request.open('POST', baseURL + '/new.php', true);
       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
@@ -80,21 +83,12 @@ class Footer extends React.Component {
    */
   generateCharacters(count = 24) {
     let characters = [];
-    let urlParams = new URLSearchParams(window.location.search);
-    let customGame = urlParams.get('game');
 
-    // check for custom game
-    if (customGame && document.querySelector('#custom-game-characters')) {
-      // parse custom game characters and map image urls
-      let customCharacters = JSON.parse(document.querySelector('#custom-game-characters').innerHTML).map(character => {
-        character.image = `${baseURL}/assets/img/${customGame}/${character.image}`;
-        return character;
-      });
-      // randomize characters
-      characters = customCharacters.sort(function(){
+    if (this.props.customGameSettings) {
+      // randomize custom characters
+      characters = this.props.customGameSettings.characters.sort(function(){
           return .5 - Math.random();
       }).slice(0, count);
-
     } else {
       // generate random characters for default game
       for (let i=0; i<count; i++) {

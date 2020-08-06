@@ -8,7 +8,7 @@ require_once('includes/db.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST['characters'])) {
         // save new game to database
-        $game_data = new_game($_POST['characters']);
+        $game_data = new_game($_POST['characters'], empty($_POST['game']) ? null : $_POST['game']);
     }
 } // if POST
 

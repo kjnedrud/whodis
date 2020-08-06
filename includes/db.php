@@ -65,7 +65,7 @@ function load_game($code) {
  * @param  [Array|String] $characters : Array of characters (names and images) to use for the new game, or JSON encoded string
  * @return [Array] $data : Associative array of the new game's code and characters, or false if there was an error
  */
-function new_game($characters) {
+function new_game($characters, $game = null) {
 
     // if json was passed, decode it
     if (is_string($characters)) {
@@ -82,6 +82,11 @@ function new_game($characters) {
 
     $characters_json = json_encode($characters);
 
+    // clean game string
+    if (!empty($game)) {
+        $game = htmlspecialchars(trim($game));
+    }
+
     // todo: check if code already exists in db
     $code = generate_random_string();
 
@@ -92,8 +97,8 @@ function new_game($characters) {
         error_log('Error connecting to database.');
     } else {
         // prepare query and then bind variables to prevent sql injection
-        $stmt = $mysqli->prepare('INSERT INTO games (code,characters) VALUES (?,?)');
-        $stmt->bind_param('ss', $code, $characters_json);
+        $stmt = $mysqli->prepare('INSERT INTO games (code,characters,game) VALUES (?,?,?)');
+        $stmt->bind_param('sss', $code, $characters_json, $game);
         // execute and check for errors
         if ($stmt->execute()) {
             $success = true;
@@ -109,7 +114,11 @@ function new_game($characters) {
 
     // return the game data
     if (!empty($success)) {
-        $data = ['code' => $code, 'characters' => $characters];
+        $data = [
+            'code' => $code,
+            'characters' => $characters,
+            'game' => $game
+        ];
         return $data;
     }
 

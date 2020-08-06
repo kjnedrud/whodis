@@ -13,7 +13,6 @@ class Game extends React.Component {
 
     constructor(props) {
         super(props);
-
         let state = {};
 
         if (props.code && props.characters) {
@@ -136,9 +135,9 @@ class Game extends React.Component {
 
         return (
             <>
-                <Header code={this.props.code} identity={this.state.identity} />
+                <Header code={this.props.code} identity={this.state.identity} title={this.props.customGameSettings ? this.props.customGameSettings.title : 'Who Dis?'} />
                 {gameContent}
-                <Footer code={this.props.code} />
+                <Footer code={this.props.code} customGameSettings={this.props.customGameSettings} />
             </>
         );
     }

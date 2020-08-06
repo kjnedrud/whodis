@@ -18,6 +18,10 @@ if (!empty($_GET['code'])) {
     }
 }
 
+if (empty($game_data['game']) && !empty($_GET['game'])) {
+    $game_data['game'] = htmlspecialchars(trim($_GET['game']));
+}
+
 ?><!doctype html>
 <html lang="en">
 
@@ -38,12 +42,15 @@ if (!empty($_GET['code'])) {
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
-    <?php if (!empty($_GET['game'])) : ?>
-        <script id="custom-game-characters" type="application/json"><?php echo file_get_contents(__DIR__ . '/includes/json/' . htmlspecialchars(trim($_GET['game'])) . '.json'); ?></script>
-    <?php endif; ?>
+    <?php if (!empty($game_data)) : ?>
+        <!-- game data -->
+        <script id="game-data" type="application/json"><?php echo json_encode($game_data); ?></script>
 
-    <!-- game data -->
-    <script id="game-data" type="application/json"><?php echo json_encode($game_data); ?></script>
+        <?php if (!empty($game_data['game'])) : ?>
+            <!-- custom game settings -->
+            <script id="custom-game-settings" type="application/json"><?php echo file_get_contents(__DIR__ . '/includes/json/' . $game_data['game'] . '.json'); ?></script>
+        <?php endif; ?>
+    <?php endif; ?>
 
     <!-- main js -->
     <script type="text/javascript" src="./assets/js/whodis.js"></script>
