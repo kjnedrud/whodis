@@ -1,5 +1,7 @@
 'use strict';
 
+import Identity from './Identity.jsx';
+
 /**
  * Component: Header
  * The game header
@@ -27,10 +29,7 @@ class Header extends React.Component {
       return (
         <>
           <header>{headerContent}</header>
-          <div class="identity">
-            <h3>Your Identity: <b>{this.props.identity.name}</b></h3>
-            <img src={this.props.identity.image} width="100" />
-          </div>
+          <Identity identity={this.props.identity} />
         </>
       );
     } else {

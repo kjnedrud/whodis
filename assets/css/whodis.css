@@ -77,6 +77,51 @@ footer h2 {
 .identity h3 {
   margin: 0 0 0.5em 0;
 }
+.identity p {
+  margin: 0.5em 0 0 0;
+}
+.identity.minimized {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 0;
+  width: 200px;
+}
+.identity.minimized h3, .identity.minimized p {
+  margin: 0;
+}
+.identity.minimized h3 {
+  font-size: 0.875em;
+}
+.identity.minimized img {
+  height: 4rem;
+  width: auto;
+}
+.identity.expanded {
+  left: 25vw;
+  padding: 2em;
+  width: 50vw;
+}
+.identity.expanded img {
+  height: 100%;
+  max-width: 100%;
+  width: auto;
+}
+
+button.control {
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 1.5rem;
+  height: 2rem;
+  line-height: 1rem;
+  margin: 0 0.25em;
+  padding: 0.25rem 0;
+  text-align: center;
+  width: 2rem;
+}
 
 .wrap {
   margin: 0 auto;
