@@ -105,6 +105,11 @@ class Footer extends React.Component {
     return (
       <footer>
         <div>
+          <h2>New Game</h2>
+          <p>Create a new game and to play with a friend!</p>
+          <button id="new-game" class="button" onClick={this.newGame}>Start New Game</button>
+        </div>
+        <div>
           <h2>Join or Continue</h2>
           <form action={baseURL} method="get">
               <p>
@@ -113,10 +118,6 @@ class Footer extends React.Component {
               </p>
               <button class="button" type="submit">Join Game</button>
           </form>
-        </div>
-        <div>
-          <h2>New Game</h2>
-          <button id="new-game" class="button" onClick={this.newGame}>Start New Game</button>
         </div>
       </footer>
     );
