@@ -1,3 +1,9 @@
+html, body {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
 html {
   font-size: 16px;
 }
@@ -7,6 +13,76 @@ body {
   font-family: sans-serif;
 }
 
+header {
+  align-items: baseline;
+  backdrop-filter: blur(2px);
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 2px solid #ccc;
+  display: flex;
+  flex-flow: row nowrap;
+  left: 0;
+  right: 0;
+  justify-content: flex-start;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+}
+header h1 {
+  font-size: 2rem;
+  line-height: 1;
+  margin: 0;
+}
+header h2 {
+  font-size: 1.5rem;
+  line-height: 1;
+  margin: 0 0 0 1rem;
+}
+
+footer {
+  align-items: stretch;
+  border-top: 2px solid #ccc;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  justify-content: space-evenly;
+  margin: 2em -1rem 0 -1rem;
+  margin-top: 2em;
+  padding: 2em;
+  text-align: left;
+  width: calc(100% + 2em);
+}
+footer h2 {
+  margin-top: 0;
+}
+
+.identity {
+  backdrop-filter: blur(2px);
+  background: rgba(243, 243, 243, 0.8);
+  border: 2px solid #333;
+  bottom: 0.5em;
+  padding: 0.5em;
+  position: fixed;
+  right: 0.5em;
+  text-align: center;
+  z-index: 100;
+}
+.identity img {
+  background: #fff;
+  border: 2px solid #000;
+  box-sizing: border-box;
+}
+.identity h3 {
+  margin: 0 0 0.5em 0;
+}
+
+.wrap {
+  margin: 0 auto;
+  padding: 5rem 1em 1em 1em;
+}
+
 .board {
   display: grid;
   grid-template-columns: repeat(8, minmax(80px, 1fr));
@@ -14,14 +90,21 @@ body {
 }
 
 .tile {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
   position: relative;
+}
+.tile:focus .front, .tile:focus .back, .tile:hover .front, .tile:hover .back {
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 .tile .front, .tile .back {
   backface-visibility: hidden;
   box-sizing: border-box;
   height: 100%;
   transform-style: preserve-3d;
-  transition: all 800ms;
+  transition: 800ms, box-shadow 200ms;
 }
 .tile .front {
   background: #ffe200;
@@ -46,7 +129,7 @@ body {
 }
 .tile .back {
   background: #f1b200;
-  border: 2px outset #ffe200;
+  border: 2px outset #f1b200;
   bottom: 0;
   content: "";
   display: block;
@@ -61,6 +144,54 @@ body {
 }
 .tile.hidden .back {
   transform: rotateX(360deg);
+}
+
+label {
+  display: block;
+  font-size: 0.875em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+label + input[type=text] {
+  margin-top: 0.25em;
+}
+
+input[type=text] {
+  border: 2px solid #999;
+  border-radius: 4px;
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  font-size: 1.25em;
+  max-width: 100%;
+  padding: 0.5em;
+  width: 300px;
+}
+input[type=text]:focus {
+  border-color: #000;
+  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.4), 0 0 0 3px #f1b200;
+  outline: none;
+}
+
+.button {
+  background: #f1b200;
+  border: 2px solid #f1b200;
+  border-radius: 2px;
+  border-radius: 3em;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  color: #333;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.5em;
+  font-weight: bold;
+  max-width: 100%;
+  padding: 0.5em 1em;
+  transition: all 200ms;
+}
+.button:focus, .button:hover {
+  background: #ffe200;
+  border: 2px solid #f1b200;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 @media screen and (max-width: 767px) {

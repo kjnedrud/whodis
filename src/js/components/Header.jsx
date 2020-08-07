@@ -24,22 +24,18 @@ class Header extends React.Component {
     }
 
     if (this.props.identity) {
-      headerContent = (
+      return (
         <>
-          {headerContent}
+          <header>{headerContent}</header>
           <div class="identity">
             <h3>Your Identity: <b>{this.props.identity.name}</b></h3>
             <img src={this.props.identity.image} width="100" />
           </div>
         </>
       );
+    } else {
+      return <header>{headerContent}</header>;
     }
-
-    return (
-      <header>
-        {headerContent}
-      </header>
-    );
 
   }
 }

@@ -16,7 +16,7 @@ class Tile extends React.Component {
 
   render() {
     return (
-      <div class={this.props.visible ? 'tile' : 'tile hidden'} onClick={this.flipTile}>
+      <div class={this.props.visible ? 'tile' : 'tile hidden'} onClick={this.flipTile} tabindex="0">
         <div class="front">
           <img src={this.props.character.image} width="100" height="100" />
           <b class="name">{this.props.character.name}</b>

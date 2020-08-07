@@ -35,7 +35,7 @@ if (empty($game_data['game']) && !empty($_GET['game'])) {
 
 <body>
 
-    <div id="game"></div>
+    <div id="game" class="wrap"></div>
 
     <!-- Load React. -->
     <!-- Note: when deploying, replace "development.js" with "production.min.js". -->

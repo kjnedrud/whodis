@@ -104,18 +104,20 @@ class Footer extends React.Component {
   render() {
     return (
       <footer>
-        <hr/>
-        <h2>Join or Continue</h2>
-        <form action={baseURL} method="get">
-            <p>
-                <label for="input-code">Game Code</label>
-                <input id="input-code" name="code" defaultValue={this.props.code} type="text" />
-            </p>
-            <button type="submit">Join Game</button>
-        </form>
-
-        <h2>New Game</h2>
-        <button id="new-game" onClick={this.newGame}>Start New Game</button>
+        <div>
+          <h2>Join or Continue</h2>
+          <form action={baseURL} method="get">
+              <p>
+                  <label for="input-code">Game Code</label>
+                  <input id="input-code" name="code" placeholder="4-Letter Code" defaultValue={this.props.code} type="text" />
+              </p>
+              <button class="button" type="submit">Join Game</button>
+          </form>
+        </div>
+        <div>
+          <h2>New Game</h2>
+          <button id="new-game" class="button" onClick={this.newGame}>Start New Game</button>
+        </div>
       </footer>
     );
   }
