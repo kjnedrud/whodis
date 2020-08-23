@@ -16,11 +16,17 @@ http://www.whodis.fun/
     * ENV - (optional) uncomment to enable production environment
     * Database Credentials
 
+### Build Process
+
+* `yarn install` - install dependencies
+* `yarn dev` - compile assets (JS and CSS) for the browser once
+* `yarn watch` - watch JS/JSX and SCSS files for changes and compile assets on save
+
 ## Random Character Generation
 
 The character images are random Bitmoji faces generated using [Matthew Nau's Libmoji library](https://github.com/matthewnau/libmoji).
 
-The names are generated based on [FiveThirtyEight's Most Common Unisex Names in America](https://github.com/fivethirtyeight/data/tree/master/unisex-names), which uses data from the [Social Security Adminstration](http://www.ssa.gov/oact/babynames/limits.html). I took the top 180 names and edited the list to remove similar names such as Kerry, Carey, and Kary. You can read more about how the original list of names was generated on [FiveThiryEight](https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/).
+The names are generated based on [FiveThirtyEight's Most Common Unisex Names in America](https://github.com/fivethirtyeight/data/tree/master/unisex-names), which uses data from the [Social Security Adminstration](http://www.ssa.gov/oact/babynames/limits.html). I took the top 180 names and edited the list to remove similar names such as Kerry, Carey, and Kary. You can read more about how the original list of names was generated on [FiveThirtyEight](https://fivethirtyeight.com/features/there-are-922-unisex-names-in-america-is-yours-one-of-them/).
 
 ## Custom Games
 
