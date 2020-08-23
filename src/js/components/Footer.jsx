@@ -3,6 +3,9 @@
 // library for generating bitmoji faces
 import libmoji from 'libmoji';
 
+// list of gender neutral first names
+import names from '../names';
+
 /**
  * Component: Footer
  * The game footer
@@ -72,8 +75,7 @@ class Footer extends React.Component {
    * @return {String} Character name
    */
   getRandomName() {
-      // todo: generate random name
-      return 'Name';
+      return names[Math.floor(Math.random() * names.length)];
   }
 
   /**
@@ -92,10 +94,15 @@ class Footer extends React.Component {
     } else {
       // generate random characters for default game
       for (let i=0; i<count; i++) {
-        characters.push({
+        let newCharacter = {
             name: this.getRandomName(),
             image: this.getRandomImage(),
-        });
+        };
+        // make sure there are no duplicate names
+        while (characters.map(char => char.name).includes(newCharacter.name)) {
+          newCharacter.name = this.getRandomName();
+        }
+        characters.push(newCharacter);
       }
     }
     return characters;
