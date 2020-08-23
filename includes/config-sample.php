@@ -7,6 +7,9 @@
 // base url - this is helpful to ensure correct relative paths if installing in a subdirectory
 define('BASE_URL', '');
 
+// environment - uncomment for production mode
+// define('ENV', 'production');
+
 /**
  * Database Credentials
  */
