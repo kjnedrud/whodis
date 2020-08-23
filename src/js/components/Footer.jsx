@@ -59,10 +59,34 @@ class Footer extends React.Component {
 
       // generate random image options
       let gender = libmoji.genders[libmoji.randInt(2)];
-      // let style = libmoji.styles[libmoji.randInt(3)];
       let style = libmoji.styles[2];
       let traits = libmoji.randTraits(libmoji.getTraits(gender[0],style[0]));
       let outfit = libmoji.randOutfit(libmoji.getOutfits(libmoji.randBrand(libmoji.getBrands(gender[0]))));
+
+      /**
+       * Randomly disable a trait based on a weighted percentage
+       * A percentage of 0 will never disable the trait and a percentage of 100 will always disble it
+       * @param  {String} traitName  : Name of the trait to disable
+       * @param  {Int} percentage : Chance that the trait will be disabled, as a percentage out of 100
+       * @return {void}
+       */
+      function maybeDisableTrait(traitName, percentage = 50) {
+
+        if (Math.random() * 100 < percentage) {
+          let traitIndex = traits.findIndex(trait => trait[0] == traitName);
+          if (traitIndex != -1) {
+            traits[traitIndex][1] = -1;
+          }
+        }
+      }
+
+      // adjust traits so not everyone has a hat, glasses, beard, etc.
+      maybeDisableTrait('beard', 33);
+      maybeDisableTrait('glasses', 50);
+      maybeDisableTrait('hat', 66);
+      maybeDisableTrait('face_lines', 66);
+      maybeDisableTrait('cheek_details', 50);
+      maybeDisableTrait('hair_treatment_tone', 66);
 
       // build image url
       let image = libmoji.buildPreviewUrl('head', 2, gender[1], style[1], 0, traits, outfit);
