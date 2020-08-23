@@ -46,12 +46,12 @@ class Identity extends React.Component {
 
   render() {
     return (
-      <div class={'identity ' + this.state.size}>
+      <div className={'identity ' + this.state.size}>
         <h3>Your Identity: <b>{this.props.identity.name}</b></h3>
         <img src={this.props.identity.image} width="100" />
         <p>
-          <button class="control" title="Minimize" onClick={this.minimize}>-</button>
-          <button class="control" title="Expand" onClick={this.expand}>+</button>
+          <button className="control" title="Minimize" onClick={this.minimize}>-</button>
+          <button className="control" title="Expand" onClick={this.expand}>+</button>
         </p>
       </div>
     );

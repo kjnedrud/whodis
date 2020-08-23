@@ -16,12 +16,12 @@ class Tile extends React.Component {
 
   render() {
     return (
-      <div class={this.props.visible ? 'tile' : 'tile hidden'} onClick={this.flipTile} tabindex="0">
-        <div class="front">
+      <div className={this.props.visible ? 'tile' : 'tile hidden'} onClick={this.flipTile} tabIndex="0">
+        <div className="front">
           <img src={this.props.character.image} width="100" height="100" />
-          <b class="name">{this.props.character.name}</b>
+          <b className="name">{this.props.character.name}</b>
         </div>
-        <div class="back"></div>
+        <div className="back"></div>
       </div>
     );
 
