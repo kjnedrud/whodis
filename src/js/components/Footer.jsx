@@ -13,16 +13,46 @@ import names from '../names';
 class Footer extends React.Component {
     constructor(props) {
         super(props);
-        this.newGame = this.newGame.bind(this);
+        this.state = {
+            loading: false,
+            errorMessage: null,
+        };
+        this.newButtonClick = this.newButtonClick.bind(this);
+        this.joinSubmit = this.joinSubmit.bind(this);
     }
 
     /**
-     * New Game event handler
+     * New Game Button click event handler
      * @param    {Event} e : Click event
      * @return {void}
      */
-    newGame(e) {
+    newButtonClick(e) {
         e.preventDefault();
+
+        this.setState(prevState => {
+            return {loading: true};
+        })
+
+        this.newGame();
+    }
+
+    /**
+     * Join Game form submit event handler
+     * @param  {Event} e : Submit event
+     * @return {void}
+     */
+    joinSubmit(e) {
+
+        this.setState(prevState => {
+            return {loading: true};
+        })
+    }
+
+    /**
+     * Generate characters and create a new game
+     * @return {void}
+     */
+    newGame() {
 
         let characters = this.generateCharacters();
         let data = 'characters=' + encodeURIComponent(JSON.stringify(characters));
@@ -33,19 +63,24 @@ class Footer extends React.Component {
         request.open('POST', baseURL + '/new.php', true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 
-        request.onload = function() {
-            if (this.status >= 200 && this.status < 400) {
-                let gameData = JSON.parse(this.response);
-                let gameURL = `${baseURL}/?code=${gameData.code}`;
-                window.location = gameURL;
-                // todo: update game data on current page instead of redirecting to new page
-                // window.history.replaceState({}, 'Who Dis?', gameURL);
-            }
-        }
+        request.onreadystatechange = () => {
 
-        request.onerror = function() {
-            // todo: error handling
-            console.log('Error creating new game');
+            if(request.readyState === XMLHttpRequest.DONE) {
+                let status = request.status;
+                let response = request.response;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    let gameData = JSON.parse(response);
+                    let gameURL = `${baseURL}/?code=${gameData.code}`;
+                    window.location = gameURL;
+                    // todo: update game data on current page instead of redirecting to new page
+                    // window.history.replaceState({}, 'Who Dis?', gameURL);
+                } else {
+                    this.setState(prevState => {
+                        return {errorMessage: 'Error creating new game.'};
+                    })
+                    console.log(response);
+                }
+            }
         }
 
         request.send(data);
@@ -119,8 +154,8 @@ class Footer extends React.Component {
             // generate random characters for default game
             for (let i=0; i<count; i++) {
                 let newCharacter = {
-                        name: this.getRandomName(),
-                        image: this.getRandomImage(),
+                    name: this.getRandomName(),
+                    image: this.getRandomImage(),
                 };
                 // make sure there are no duplicate names
                 while (characters.map(char => char.name).includes(newCharacter.name)) {
@@ -133,23 +168,29 @@ class Footer extends React.Component {
     }
 
     render() {
+
+        let newGameError = this.state.errorMessage ? <p className="error-message">{this.state.errorMessage}</p> : '';
+        let loadingGame = this.state.loading ? <p className="loading-message">Loading game...</p> : '';
+
         return (
             <footer>
                 <div>
                     <h2>New Game</h2>
                     <p>Create a new game and to play with a friend!</p>
-                    <button id="new-game" className="button" onClick={this.newGame}>Start New Game</button>
+                    <button id="new-game" className="button" onClick={this.newButtonClick} disabled={this.state.loading}>Start New Game</button>
+                    {newGameError}
                 </div>
                 <div>
                     <h2>Join or Continue</h2>
-                    <form action={baseURL} method="get">
-                            <p>
-                                    <label htmlFor="input-code">Game Code</label>
-                                    <input id="input-code" name="code" placeholder="4-Letter Code" defaultValue={this.props.code} type="text" />
-                            </p>
-                            <button className="button" type="submit">Join Game</button>
+                    <form action={baseURL} method="get" onSubmit={this.joinSubmit}>
+                        <p>
+                            <label htmlFor="input-code">Game Code</label>
+                            <input id="input-code" name="code" placeholder="4-Letter Code" defaultValue={this.props.code} type="text" readOnly={this.state.loading} />
+                        </p>
+                        <button className="button" type="submit" disabled={this.state.loading}>Join Game</button>
                     </form>
                 </div>
+                {loadingGame}
             </footer>
         );
     }
