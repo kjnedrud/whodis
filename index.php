@@ -29,6 +29,18 @@ if (empty($game_data['game']) && !empty($_GET['game'])) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
     <title>Who Dis?</title>
+
+    <?php if (defined('GOOGLE_ANALYTICS_ID') && defined('ENV') && ENV == 'production') : ?>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177103830-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '<?php echo GOOGLE_ANALYTICS_ID; ?>');
+        </script>
+    <?php endif; ?>
+
     <link rel="stylesheet" type="text/css" href="./assets/css/whodis.css">
     <script>const baseURL = '<?php echo BASE_URL; ?>';</script>
 </head>

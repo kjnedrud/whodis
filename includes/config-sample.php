@@ -10,6 +10,9 @@ define('BASE_URL', '');
 // environment - uncomment for production mode
 // define('ENV', 'production');
 
+// google analytics id - only used in production mode
+// define('GOOGLE_ANALYTICS_ID', '');
+
 /**
  * Database Credentials
  */
