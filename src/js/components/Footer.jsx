@@ -174,13 +174,13 @@ class Footer extends React.Component {
 
         return (
             <footer>
-                <div>
+                <section>
                     <h2>New Game</h2>
-                    <p>Create a new game and to play with a friend!</p>
+                    <p>Create a new game to play with a friend!</p>
                     <button id="new-game" className="button" onClick={this.newButtonClick} disabled={this.state.loading}>Start New Game</button>
                     {newGameError}
-                </div>
-                <div>
+                </section>
+                <section>
                     <h2>Join or Continue</h2>
                     <form action={baseURL} method="get" onSubmit={this.joinSubmit}>
                         <p>
@@ -189,7 +189,7 @@ class Footer extends React.Component {
                         </p>
                         <button className="button" type="submit" disabled={this.state.loading}>Join Game</button>
                     </form>
-                </div>
+                </section>
                 {loadingGame}
             </footer>
         );

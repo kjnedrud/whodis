@@ -127,10 +127,16 @@ class Game extends React.Component {
 
         } else if (this.props.code) {
             gameContent = (
-                <p className="error-message">Sorry, <b>{this.props.code}</b> is not a valid game code.</p>
+                <div className="empty-content">
+                    <p className="error-message">Sorry, <b>{this.props.code}</b> is not a valid game code.</p>
+                </div>
             );
         } else {
-            gameContent = (<p>Start a new game, or enter a game code to join a friend's game!</p>);
+            gameContent = (
+                <div className="empty-content">
+                    <p>Start a new game, or enter a game code to join a friend's game!</p>
+                </div>
+            );
         }
 
         return (

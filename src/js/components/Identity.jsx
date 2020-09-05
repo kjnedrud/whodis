@@ -17,30 +17,16 @@ class Identity extends React.Component {
     }
 
     expand(e) {
-        // adjust size based on current size
-        let newSize = this.state.size;
-        if (this.state.size == 'minimized') {
-            newSize = '';
-        } else if (this.state.size == '') {
-            newSize = 'expanded';
-        }
         // update react state
         this.setState(prevState => {
-            return {size: newSize};
+            return {size: 'expanded'};
         });
     }
 
     minimize(e) {
-        // adjust size based on current size
-        let newSize = this.state.size;
-        if (this.state.size == '') {
-            newSize = 'minimized';
-        } else if (this.state.size == 'expanded') {
-            newSize = '';
-        }
         // update react state
         this.setState(prevState => {
-                return {size: newSize};
+                return {size: ''};
         });
     }
 
@@ -48,10 +34,10 @@ class Identity extends React.Component {
         return (
             <div className={'identity ' + this.state.size}>
                 <h3>Your Identity: <b>{this.props.identity.name}</b></h3>
-                <img src={this.props.identity.image} width="100" />
+                <img src={this.props.identity.image} height="100" />
                 <p>
-                    <button className="control" title="Minimize" onClick={this.minimize}>-</button>
-                    <button className="control" title="Expand" onClick={this.expand}>+</button>
+                    <button className="control" title="Minimize" style={{display: this.state.size == 'expanded' ? null : 'none'}} onClick={this.minimize}>-</button>
+                    <button className="control" title="Expand" style={{display: this.state.size == 'expanded' ? 'none' : null}} onClick={this.expand}>+</button>
                 </p>
             </div>
         );
