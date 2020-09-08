@@ -134,7 +134,7 @@ class Game extends React.Component {
         } else {
             gameContent = (
                 <div className="empty-content">
-                    <p>Start a new game, or enter a game code to join a friend's game!</p>
+                    <p><b>Who Dis?</b> is a face guessing game where you take turns asking yes-or-no questions to guess the other player's identity by process of&nbsp;elimination.</p>
                 </div>
             );
         }

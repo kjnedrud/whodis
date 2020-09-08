@@ -174,23 +174,29 @@ class Footer extends React.Component {
 
         return (
             <footer>
-                <section>
-                    <h2>New Game</h2>
-                    <p>Create a new game to play with a friend!</p>
-                    <button id="new-game" className="button" onClick={this.newButtonClick} disabled={this.state.loading}>Start New Game</button>
-                    {newGameError}
-                </section>
-                <section>
-                    <h2>Join or Continue</h2>
-                    <form action={baseURL} method="get" onSubmit={this.joinSubmit}>
-                        <p>
-                            <label htmlFor="input-code">Game Code</label>
-                            <input id="input-code" name="code" placeholder="4-Letter Code" defaultValue={this.props.code} type="text" readOnly={this.state.loading} />
-                        </p>
-                        <button className="button" type="submit" disabled={this.state.loading}>Join Game</button>
-                    </form>
-                </section>
+                <div class="forms">
+                    <section>
+                        <h2>New Game</h2>
+                        <p>Create a new game to play with a friend!</p>
+                        <button id="new-game" className="button" onClick={this.newButtonClick} disabled={this.state.loading}>Start New Game</button>
+                        {newGameError}
+                    </section>
+                    <section>
+                        <h2>Join or Continue</h2>
+                        <form action={baseURL} method="get" onSubmit={this.joinSubmit}>
+                            <p>
+                                <label htmlFor="input-code">Game Code</label>
+                                <input id="input-code" name="code" placeholder="4-Letter Code" defaultValue={this.props.code} type="text" readOnly={this.state.loading} />
+                            </p>
+                            <button className="button" type="submit" disabled={this.state.loading}>Join Game</button>
+                        </form>
+                    </section>
+                </div>
                 {loadingGame}
+                <div class="bottom-bar">
+                    <hr/>
+                    <p class="small-text"><b>Who Dis?</b> is a project by <a href="https://www.kirstenjnedrud.com/" target="_blank">Kirsten Nedrud</a> and is in no way affiliated with, authorized, maintained, sponsored or endorsed by Hasbro, Bitmoji, or any affiliates or subsidiaries. <a href="https://github.com/kjnedrud/whodis" target="_blank">Git&nbsp;Repo</a></p>
+                </div>
             </footer>
         );
     }

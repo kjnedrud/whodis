@@ -31,16 +31,27 @@ class Identity extends React.Component {
     }
 
     render() {
-        return (
-            <div className={'identity ' + this.state.size}>
-                <h3>Your Identity: <b>{this.props.identity.name}</b></h3>
-                <img src={this.props.identity.image} height="100" />
-                <p>
-                    <button className="control" title="Minimize" style={{display: this.state.size == 'expanded' ? null : 'none'}} onClick={this.minimize}>-</button>
-                    <button className="control" title="Expand" style={{display: this.state.size == 'expanded' ? 'none' : null}} onClick={this.expand}>+</button>
-                </p>
-            </div>
-        );
+
+        if (this.state.size == 'expanded') {
+            // expanded
+            return (
+                <div className={'identity ' + this.state.size}>
+                    <h3>Your Identity: <b>{this.props.identity.name}</b></h3>
+                    <img src={this.props.identity.image} height="100" />
+                    <button className="close" title="Minimize" onClick={this.minimize}>&times;</button>
+                </div>
+            );
+        } else {
+            // thumbnail - click to expand
+            return (
+                <div className={'identity ' + this.state.size}>
+                    <h3>Your Identity: <b>{this.props.identity.name}</b></h3>
+                    <button className="expand" title="Expand" onClick={this.expand}>
+                        <img src={this.props.identity.image} class="thumbnail" height="100" alt="View Larger" />
+                    </button>
+                </div>
+            );
+        }
     }
 }
 

@@ -13,17 +13,28 @@ body {
   font-family: sans-serif;
 }
 
+a {
+  color: #00729f;
+}
+a:focus, a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
 header {
+  align-content: center;
   align-items: baseline;
   backdrop-filter: blur(2px);
   background: rgba(243, 243, 243, 0.8);
   border-bottom: 2px solid #ccc;
+  box-sizing: border-box;
   display: flex;
   flex-flow: row wrap;
+  height: 6rem;
   left: 0;
   right: 0;
   justify-content: flex-start;
-  padding: 2rem;
+  padding: 2rem 1rem;
   position: fixed;
   top: 0;
   width: 100%;
@@ -44,14 +55,20 @@ header h2 {
 }
 
 footer {
-  align-items: stretch;
   box-sizing: border-box;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  justify-content: space-evenly;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  justify-content: space-between;
   margin: 0;
   padding: 0 1em;
+  text-align: left;
+}
+footer .forms {
+  align-items: stretch;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
   text-align: left;
 }
 footer section {
@@ -74,13 +91,27 @@ footer .loading-message {
   text-align: center;
   width: 100%;
 }
+footer .bottom-bar {
+  align-self: flex-end;
+  text-align: center;
+  width: 100%;
+}
+footer hr {
+  background: #ccc;
+  border: 0;
+  height: 2px;
+  width: 100%;
+}
+footer .small-text {
+  font-size: 0.75em;
+}
 
 .identity {
   align-items: center;
   box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
-  padding: 0.5em 3.25rem 0.5em 0.5em;
+  padding: 0.5em 1rem 0.5em 0.5em;
   position: fixed;
   right: 0;
   text-align: center;
@@ -91,9 +122,12 @@ footer .loading-message {
   background: #fff;
   border: 2px solid #000;
   box-sizing: border-box;
-  height: 5em;
-  margin: 0 0.5em;
+  display: block;
   width: auto;
+}
+.identity img.thumbnail {
+  height: 5rem;
+  border-color: #00729f;
 }
 .identity h3, .identity p {
   margin: 0;
@@ -105,7 +139,10 @@ footer .loading-message {
   display: block;
   font-size: 2em;
 }
-.identity .control {
+.identity .expand {
+  margin-left: 0.5em;
+}
+.identity .close {
   position: absolute;
   right: 1rem;
   top: 1rem;
@@ -132,7 +169,7 @@ footer .loading-message {
   width: auto;
 }
 
-button.control {
+button.close {
   background: #fff;
   border: 2px solid #ccc;
   border-radius: 1rem;
@@ -147,8 +184,17 @@ button.control {
   width: 2rem;
 }
 
+button.expand {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+
 .wrap {
   box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
   margin: 0 auto;
   min-height: 100vh;
   padding: 6rem 0 0 0;
@@ -159,7 +205,7 @@ button.control {
   grid-gap: 1em;
   grid-template-columns: repeat(8, minmax(80px, 1fr));
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 1rem;
 }
 .board + footer {
   border-top: 2px solid #ccc;
@@ -287,7 +333,7 @@ input[type=text]:read-only {
 
 .empty-content {
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 1rem;
   text-align: center;
 }
 
@@ -303,9 +349,8 @@ input[type=text]:read-only {
   footer {
     margin-top: 0;
   }
-
-  .identity img {
-    height: 3.75em;
+  footer .forms {
+    align-content: flex-start;
   }
 
   .wrap {
@@ -318,22 +363,36 @@ input[type=text]:read-only {
 }
 @media screen and (max-width: 599px) {
   header {
-    padding: 1rem;
+    font-size: 0.5em;
+    height: 5rem;
+    padding: 0.5rem 1rem;
   }
   header h1, header h2 {
     width: 50%;
   }
+  header h1 {
+    margin-bottom: 0.5em;
+  }
+  header .code {
+    display: block;
+    font-size: 2em;
+    margin-top: 2px;
+  }
+  header.simple {
+    font-size: 1em;
+  }
+  header.simple h1 {
+    margin: 0;
+    text-align: center;
+    max-width: initial;
+    width: 100%;
+  }
 
   .identity {
-    padding-right: 0.5em;
+    padding: 0 0.5em;
   }
-  .identity .control {
-    opacity: 0.75;
-    right: 0.5rem;
-    top: 0.5rem;
-  }
-  .identity .control:focus, .identity .control:hover {
-    opacity: 1;
+  .identity .thumbnail {
+    height: 4rem;
   }
   .identity.expanded {
     padding-top: 2em;
@@ -345,7 +404,7 @@ input[type=text]:read-only {
   }
 
   .wrap {
-    padding-top: 4.5rem;
+    padding-top: 5rem;
   }
 
   .empty-content {
@@ -368,5 +427,8 @@ input[type=text]:read-only {
 
   footer {
     margin-top: 0;
+  }
+  footer h2 {
+    font-size: 1.25em;
   }
 }

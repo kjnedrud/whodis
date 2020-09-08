@@ -1,5 +1,6 @@
 $yellow: #ffe200;
 $yellow-dark: #f1b200;
+$blue: #00729f;
 
 html, body {
     border: 0;
@@ -16,17 +17,29 @@ body {
     font-family: sans-serif;
 }
 
+a {
+    color: $blue;
+
+    &:focus, &:hover {
+        color: #000;
+        text-decoration: underline;
+    }
+}
+
 header {
+    align-content: center;
     align-items: baseline;
     backdrop-filter: blur(2px);
     background: rgba(#f3f3f3, 0.8);
     border-bottom: 2px solid #ccc;
+    box-sizing: border-box;
     display: flex;
     flex-flow: row wrap;
+    height: 6rem;
     left: 0;
     right: 0;
     justify-content: flex-start;
-    padding: 2rem;
+    padding: 2rem 1rem;
     position: fixed;
     top: 0;
     width: 100%;
@@ -49,15 +62,22 @@ header {
 }
 
 footer {
-    align-items: stretch;
     box-sizing: border-box;
     display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    justify-content: space-evenly;
+    flex-flow: column nowrap;
+    flex-grow: 1;
+    justify-content: space-between;
     margin: 0;
     padding: 0 1em;
     text-align: left;
+
+    .forms {
+        align-items: stretch;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        text-align: left;
+    }
 
     section {
         box-sizing: border-box;
@@ -82,6 +102,23 @@ footer {
         text-align: center;
         width: 100%;
     }
+
+    .bottom-bar {
+        align-self: flex-end;
+        text-align: center;
+        width: 100%;
+    }
+
+    hr {
+        background: #ccc;
+        border: 0;
+        height: 2px;
+        width: 100%;
+    }
+
+    .small-text {
+        font-size: 0.75em;
+    }
 }
 
 .identity {
@@ -89,7 +126,7 @@ footer {
     box-sizing: border-box;
     display: flex;
     flex-flow: row nowrap;
-    padding: 0.5em 3.25rem 0.5em 0.5em;
+    padding: 0.5em 1rem 0.5em 0.5em;
     position: fixed;
     right: 0;
     text-align: center;
@@ -100,9 +137,13 @@ footer {
         background: #fff;
         border: 2px solid #000;
         box-sizing: border-box;
-        height: 5em;
-        margin: 0 0.5em;
+        display: block;
         width: auto;
+
+        &.thumbnail {
+            height: 5rem;
+            border-color: $blue;
+        }
     }
 
     h3, p {
@@ -118,7 +159,11 @@ footer {
         }
     }
 
-    .control {
+    .expand {
+        margin-left: 0.5em;
+    }
+
+    .close {
         position: absolute;
         right: 1rem;
         top: 1rem;
@@ -148,7 +193,7 @@ footer {
     }
 }
 
-button.control {
+button.close {
     background: #fff;
     border: 2px solid #ccc;
     border-radius: 1rem;
@@ -163,8 +208,17 @@ button.control {
     width: 2rem;
 }
 
+button.expand {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+}
+
 .wrap {
     box-sizing: border-box;
+    display: flex;
+    flex-flow: column nowrap;
     margin: 0 auto;
     min-height: 100vh;
     padding: 6rem 0 0 0;
@@ -175,7 +229,7 @@ button.control {
     grid-gap: 1em;
     grid-template-columns: repeat(8, minmax(80px, 1fr));
     margin: 0 auto;
-    padding: 2rem;
+    padding: 2rem 1rem;
 
     + footer {
         border-top: 2px solid #ccc;
@@ -326,7 +380,7 @@ input[type=text] {
 
 .empty-content {
     margin: 0 auto;
-    padding: 2rem;
+    padding: 2rem 1rem;
     text-align: center;
 }
 
@@ -342,10 +396,14 @@ input[type=text] {
 
     footer {
         margin-top: 0;
+
+        .forms {
+            align-content: flex-start;
+        }
     }
 
-    .identity img {
-        height: (0.75 * 5em);
+    .identity .thumbnail {
+        // height: (0.75 * 5em);
     }
 
     .wrap {
@@ -360,24 +418,41 @@ input[type=text] {
 @media screen and (max-width: 599px) {
 
     header {
-        padding: 1rem;
+        font-size: 0.5em;
+        height: 5rem;
+        padding: 0.5rem 1rem;
 
         h1, h2 {
             width: 50%;
         }
+
+        h1 {
+            margin-bottom: 0.5em;
+        }
+
+        .code {
+            display: block;
+            font-size: 2em;
+            margin-top: 2px;
+        }
+
+        &.simple {
+            font-size: 1em;
+
+            h1 {
+                margin: 0;
+                text-align: center;
+                max-width: initial;
+                width: 100%;
+            }
+        }
     }
 
     .identity {
-        padding-right: 0.5em;
+        padding: 0 0.5em;
 
-        .control {
-            opacity: 0.75;
-            right: 0.5rem;
-            top: 0.5rem;
-
-            &:focus, &:hover {
-                opacity: 1;
-            }
+        .thumbnail {
+            height: 4rem;
         }
 
         &.expanded {
@@ -392,7 +467,7 @@ input[type=text] {
     }
 
     .wrap {
-        padding-top: 4.5rem;
+        padding-top: 5rem;
     }
 
     .empty-content {
@@ -415,5 +490,9 @@ input[type=text] {
 
     footer {
         margin-top: 0;
+
+        h2 {
+            font-size: 1.25em;
+        }
     }
 }

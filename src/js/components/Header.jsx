@@ -20,7 +20,7 @@ class Header extends React.Component {
             headerContent = (
                 <>
                     {headerContent}
-                    <h2>Game Code: {this.props.code}</h2>
+                    <h2>Game Code: <span class="code">{this.props.code}</span></h2>
                 </>
             );
         }
@@ -33,7 +33,7 @@ class Header extends React.Component {
                 </>
             );
         } else {
-            return <header>{headerContent}</header>;
+            return <header className={this.props.code ? '' : 'simple'}>{headerContent}</header>;
         }
 
     }
