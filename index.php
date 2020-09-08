@@ -7,6 +7,7 @@
 require_once(__DIR__ . '/includes/config.php');
 require_once(__DIR__ . '/includes/db.php');
 
+$version = '1.0.0';
 $code = null;
 $game_data = null;
 
@@ -41,7 +42,7 @@ if (empty($game_data['game']) && !empty($_GET['game'])) {
         </script>
     <?php endif; ?>
 
-    <link rel="stylesheet" type="text/css" href="./assets/css/whodis.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/whodis.css?v=<?php echo $version; ?>">
     <script>const baseURL = '<?php echo BASE_URL; ?>';</script>
 </head>
 
@@ -69,7 +70,7 @@ if (empty($game_data['game']) && !empty($_GET['game'])) {
     <?php endif; ?>
 
     <!-- main js -->
-    <script type="text/javascript" src="./assets/js/whodis.js"></script>
+    <script type="text/javascript" src="./assets/js/whodis.js?v=<?php echo $version; ?>"></script>
 
 </body>
 
